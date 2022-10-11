@@ -2,7 +2,7 @@
 
 namespace inery {
 
-void nerii::create( const name&   issuer,
+void neriitoken::create( const name&   issuer,
                     const asset&  maximum_supply )
 {
     require_auth( get_self() );
@@ -24,7 +24,7 @@ void nerii::create( const name&   issuer,
 }
 
 
-void nerii::issue( const name& to, const asset& quantity, const string& memo )
+void neriitoken::issue( const name& to, const asset& quantity, const string& memo )
 {
     auto sym = quantity.symbol;
     check( sym.is_valid(), "NGETIK YANG BENER!!!" );
@@ -50,7 +50,7 @@ void nerii::issue( const name& to, const asset& quantity, const string& memo )
     add_balance( st.issuer, quantity, st.issuer );
 }
 
-void nerii::retire( const asset& quantity, const string& memo )
+void neriitoken::retire( const asset& quantity, const string& memo )
 {
     auto sym = quantity.symbol;
     check( sym.is_valid(), "NGETIK YANG BENER!!!" );
@@ -74,7 +74,7 @@ void nerii::retire( const asset& quantity, const string& memo )
     sub_balance( st.issuer, quantity );
 }
 
-void nerii::transfer( const name&    from,
+void neriitoken::transfer( const name&    from,
                       const name&    to,
                       const asset&   quantity,
                       const string&  memo )
@@ -100,7 +100,7 @@ void nerii::transfer( const name&    from,
     add_balance( to, quantity, payer );
 }
 
-void nerii::sub_balance( const name& owner, const asset& value ) {
+void neriitoken::sub_balance( const name& owner, const asset& value ) {
    accounts from_acnts( get_self(), owner.value );
 
    const auto& from = from_acnts.get( value.symbol.code().raw(), "no balance object found" );
@@ -111,7 +111,7 @@ void nerii::sub_balance( const name& owner, const asset& value ) {
       });
 }
 
-void nerii::add_balance( const name& owner, const asset& value, const name& mem_payer )
+void neriitoken::add_balance( const name& owner, const asset& value, const name& mem_payer )
 {
    accounts to_acnts( get_self(), owner.value );
    auto to = to_acnts.find( value.symbol.code().raw() );
@@ -126,7 +126,7 @@ void nerii::add_balance( const name& owner, const asset& value, const name& mem_
    }
 }
 
-void nerii::open( const name& owner, const symbol& symbol, const name& mem_payer )
+void neriitoken::open( const name& owner, const symbol& symbol, const name& mem_payer )
 {
    require_auth( mem_payer );
 
@@ -146,7 +146,7 @@ void nerii::open( const name& owner, const symbol& symbol, const name& mem_payer
    }
 }
 
-void nerii::close( const name& owner, const symbol& symbol )
+void neriitoken::close( const name& owner, const symbol& symbol )
 {
    require_auth( owner );
    accounts acnts( get_self(), owner.value );
