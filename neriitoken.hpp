@@ -22,7 +22,7 @@ namespace inery {
     * 
     * Similarly, the `stats` multi-index table, holds instances of `currency_stats` objects for each row, which contains information about current supply, maximum supply, and the creator account for a symbol token. The `stats` table is scoped to the token symbol.  Therefore, when one queries the `stats` table for a token symbol the result is one single entry/row corresponding to the queried symbol token if it was previously created, or nothing, otherwise.
     */
-   class [[inery::contract("nerii")]] nerii : public contract {
+   class [[inery::contract("neriitoken")]] neriitoken : public contract {
       public:
          using contract::contract;
 
@@ -115,12 +115,12 @@ namespace inery {
             return ac.balance;
          }
 
-         using create_action = inery::action_wrapper<"create"_n, &nerii::create>;
-         using issue_action = inery::action_wrapper<"issue"_n, &nerii::issue>;
-         using retire_action = inery::action_wrapper<"retire"_n, &nerii::retire>;
-         using transfer_action = inery::action_wrapper<"transfer"_n, &nerii::transfer>;
-         using open_action = inery::action_wrapper<"open"_n, &nerii::open>;
-         using close_action = inery::action_wrapper<"close"_n, &nerii::close>;
+         using create_action = inery::action_wrapper<"create"_n, &neriitoken::create>;
+         using issue_action = inery::action_wrapper<"issue"_n, &neriitoken::issue>;
+         using retire_action = inery::action_wrapper<"retire"_n, &neriitoken::retire>;
+         using transfer_action = inery::action_wrapper<"transfer"_n, &neriitoken::transfer>;
+         using open_action = inery::action_wrapper<"open"_n, &neriitoken::open>;
+         using close_action = inery::action_wrapper<"close"_n, &neriitoken::close>;
       private:
          struct [[inery::table]] account {
             asset    balance;
